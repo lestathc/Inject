@@ -1,5 +1,7 @@
 # Xcode
 #
+# .gitignore comes from https://github.com/github/gitignore/blob/master/Objective-C.gitignore
+.DS_Store
 build/
 *.pbxuser
 !default.pbxuser
@@ -17,10 +19,23 @@ DerivedData
 *.ipa
 *.xcuserstate
 
+# Emacs
+#
+# adopt from: https://github.com/github/gitignore/blob/master/Global/Emacs.gitignore
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
 # CocoaPods
 #
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
 #
-# Pods/
+Pods/
