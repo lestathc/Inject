@@ -7,11 +7,11 @@
 @interface ViewController (__Objection__Autogen__)
 @end
 @implementation ViewController (__Objection__Autogen__)
-objection_requires(@"typedViewController",@"nonTypedViewController")
+objection_requires(@"typedViewController",@"nonTypedViewController",@"classA",@"classB",@"classC",@"classCF",@"classD")
 @end
 
-@interface AppDelegate (__Objection__Autogen__)
+@interface InjectableClassC (__Objection__Autogen__)
 @end
-@implementation AppDelegate (__Objection__Autogen__)
-objection_requires(@"abc",@"classA")
+@implementation InjectableClassC (__Objection__Autogen__)
+objection_requires(@"classA",@"classB")
 @end

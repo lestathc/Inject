@@ -8,6 +8,7 @@
 
 @interface UIViewController (SOContex)
 
+@property(strong, nonatomic) JSObjectionInjector *so_inheritedInjector;
 @property(assign, nonatomic) JSObjectionInjector *so_injector;
 
 @end
@@ -18,42 +19,34 @@ objection_requires_sel(@selector(so_injector))
 
 + (void)load {
   NSError *error;
-  [self jr_swizzleMethod:@selector(init)
-              withMethod:@selector(so_swizzle_init)
-                   error:&error];
-  [self jr_swizzleMethod:@selector(initWithCoder:)
-              withMethod:@selector(so_swizzle_initWithCoder:)
-                   error:&error];
-  [self jr_swizzleMethod:@selector(initWithNibName:bundle:)
-              withMethod:@selector(so_swizzle_initWithNibName:bundle:)
+  [self jr_swizzleMethod:@selector(viewDidLoad)
+              withMethod:@selector(so_swizzle_viewDidLoad)
                    error:&error];
 }
 
 - (instancetype)initWithInheritedInjector:(JSObjectionInjector *)injector {
-  self = [self so_swizzle_init];
+  self = [self init];
   if (self) {
-    [self mayInejctSelfInheritsInjector:injector];
+    self.so_inheritedInjector = injector;
   }
   return self;
 }
 
-- (instancetype)so_swizzle_init {
-  id result = [self so_swizzle_init];
-  [self mayInejctSelfInheritsInjector:[JSObjection defaultInjector]];
-  return result;
+- (void)so_swizzle_viewDidLoad {
+  [self so_swizzle_viewDidLoad];
+  JSObjectionInjector *inheritedInjector = self.so_inheritedInjector;
+  if (inheritedInjector == nil ) {
+    inheritedInjector = [JSObjection defaultInjector];
+  }
+  [self mayInejctSelfInheritsInjector:inheritedInjector];
 }
 
-- (id)so_swizzle_initWithCoder:(NSCoder *)aDecoder {
-  id result = [self so_swizzle_initWithCoder:aDecoder];
-  [self mayInejctSelfInheritsInjector:[JSObjection defaultInjector]];
-  return result;
+- (void)setSo_inheritedInjector:(JSObjectionInjector *)so_inheritedInjector {
+  objc_setAssociatedObject(self, @selector(so_inheritedInjector), so_inheritedInjector, OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (instancetype)so_swizzle_initWithNibName:(NSString *)nibNameOrNil
-                                 bundle:(NSBundle *)nibBundleOrNil {
-  id result = [self so_swizzle_initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-  [self mayInejctSelfInheritsInjector:[JSObjection defaultInjector]];
-  return result;
+- (JSObjectionInjector *)so_inheritedInjector {
+  return objc_getAssociatedObject(self, @selector(so_inheritedInjector));
 }
 
 - (void)setSo_injector:(JSObjectionInjector *)so_injector {
