@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		18F87E7FDE0AFC4AA5D54904 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A855FD49559D4190F673008A /* libPods.a */; };
 		BD03DCB11AE5D2F80060922A /* GeneratedObjection.m in Sources */ = {isa = PBXBuildFile; fileRef = BD03DCB01AE5D2F80060922A /* GeneratedObjection.m */; };
+		BD4E67791AE70312007D9F51 /* SOInjectorModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4E67781AE70312007D9F51 /* SOInjectorModule.m */; };
+		BD4E677D1AE7051F007D9F51 /* UIViewController+SOContext.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4E677C1AE7051F007D9F51 /* UIViewController+SOContext.m */; };
+		BD4E67801AE705AA007D9F51 /* SOViewControllerModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4E677F1AE705AA007D9F51 /* SOViewControllerModule.m */; };
+		BD4E67841AE7092F007D9F51 /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4E67831AE7092F007D9F51 /* JRSwizzle.m */; };
 		BDC86AD81AC0DB9A007CC09E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC86AD71AC0DB9A007CC09E /* main.m */; };
 		BDC86ADB1AC0DB9A007CC09E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC86ADA1AC0DB9A007CC09E /* AppDelegate.m */; };
 		BDC86ADE1AC0DB9A007CC09E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC86ADD1AC0DB9A007CC09E /* ViewController.m */; };
@@ -33,6 +37,15 @@
 		A855FD49559D4190F673008A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76A99E6D5BA85D6FB51FFAE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BD03DCB01AE5D2F80060922A /* GeneratedObjection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeneratedObjection.m; path = Gen/GeneratedObjection.m; sourceTree = SOURCE_ROOT; };
+		BD4E67771AE70312007D9F51 /* SOInjectorModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SOInjectorModule.h; path = ../Inject/SOInjectorModule.h; sourceTree = "<group>"; };
+		BD4E67781AE70312007D9F51 /* SOInjectorModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SOInjectorModule.m; path = ../Inject/SOInjectorModule.m; sourceTree = "<group>"; };
+		BD4E677A1AE7044A007D9F51 /* SOContextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SOContextViewController.h; path = ../Inject/SOContextViewController.h; sourceTree = "<group>"; };
+		BD4E677B1AE7051F007D9F51 /* UIViewController+SOContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+SOContext.h"; path = "../Inject/UIViewController+SOContext.h"; sourceTree = "<group>"; };
+		BD4E677C1AE7051F007D9F51 /* UIViewController+SOContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+SOContext.m"; path = "../Inject/UIViewController+SOContext.m"; sourceTree = "<group>"; };
+		BD4E677E1AE705AA007D9F51 /* SOViewControllerModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SOViewControllerModule.h; path = ../Inject/SOViewControllerModule.h; sourceTree = "<group>"; };
+		BD4E677F1AE705AA007D9F51 /* SOViewControllerModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SOViewControllerModule.m; path = ../Inject/SOViewControllerModule.m; sourceTree = "<group>"; };
+		BD4E67821AE7092F007D9F51 /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRSwizzle.h; path = ../External/JRSwizzle/JRSwizzle.h; sourceTree = "<group>"; };
+		BD4E67831AE7092F007D9F51 /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRSwizzle.m; path = ../External/JRSwizzle/JRSwizzle.m; sourceTree = "<group>"; };
 		BDC86AD21AC0DB9A007CC09E /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDC86AD61AC0DB9A007CC09E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDC86AD71AC0DB9A007CC09E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -46,7 +59,7 @@
 		BDC86AEB1AC0DB9A007CC09E /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDC86AF01AC0DB9A007CC09E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDC86AF11AC0DB9A007CC09E /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
-		BDC86AFD1AC0E4A9007CC09E /* InjectMeta.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = InjectMeta.h; path = ../Inject/InjectMeta.h; sourceTree = "<group>"; };
+		BDC86AFD1AC0E4A9007CC09E /* SOInjectMeta.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SOInjectMeta.h; path = ../Inject/SOInjectMeta.h; sourceTree = "<group>"; };
 		BDC86AFE1AC0E530007CC09E /* gen_objection_requires.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = gen_objection_requires.py; path = ../Inject/gen_objection_requires.py; sourceTree = "<group>"; };
 		FE2E23BCC115328574C22972 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,9 +92,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BD4E67811AE70914007D9F51 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				BD4E67821AE7092F007D9F51 /* JRSwizzle.h */,
+				BD4E67831AE7092F007D9F51 /* JRSwizzle.m */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
 		BDC86AC91AC0DB9A007CC09E = {
 			isa = PBXGroup;
 			children = (
+				BD4E67811AE70914007D9F51 /* External */,
 				BDC86AFB1AC0DC27007CC09E /* Inject */,
 				BDC86AD41AC0DB9A007CC09E /* Example */,
 				BDC86AEE1AC0DB9A007CC09E /* ExampleTests */,
@@ -146,7 +169,14 @@
 			isa = PBXGroup;
 			children = (
 				BDC86AFE1AC0E530007CC09E /* gen_objection_requires.py */,
-				BDC86AFD1AC0E4A9007CC09E /* InjectMeta.h */,
+				BDC86AFD1AC0E4A9007CC09E /* SOInjectMeta.h */,
+				BD4E67771AE70312007D9F51 /* SOInjectorModule.h */,
+				BD4E67781AE70312007D9F51 /* SOInjectorModule.m */,
+				BD4E677A1AE7044A007D9F51 /* SOContextViewController.h */,
+				BD4E677B1AE7051F007D9F51 /* UIViewController+SOContext.h */,
+				BD4E677C1AE7051F007D9F51 /* UIViewController+SOContext.m */,
+				BD4E677E1AE705AA007D9F51 /* SOViewControllerModule.h */,
+				BD4E677F1AE705AA007D9F51 /* SOViewControllerModule.m */,
 			);
 			name = Inject;
 			sourceTree = "<group>";
@@ -311,7 +341,11 @@
 			files = (
 				BDC86ADE1AC0DB9A007CC09E /* ViewController.m in Sources */,
 				BDC86ADB1AC0DB9A007CC09E /* AppDelegate.m in Sources */,
+				BD4E67841AE7092F007D9F51 /* JRSwizzle.m in Sources */,
+				BD4E67791AE70312007D9F51 /* SOInjectorModule.m in Sources */,
 				BDC86AD81AC0DB9A007CC09E /* main.m in Sources */,
+				BD4E677D1AE7051F007D9F51 /* UIViewController+SOContext.m in Sources */,
+				BD4E67801AE705AA007D9F51 /* SOViewControllerModule.m in Sources */,
 				BD03DCB11AE5D2F80060922A /* GeneratedObjection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

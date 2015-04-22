@@ -1,14 +1,13 @@
-//
-//  ViewController.m
-//  Example
-//
-//  Created by Cong Hui on 3/23/15.
-//  Copyright (c) 2015 SweetOnion. All rights reserved.
-//
-
+#import "SOContextViewController.h"
 #import "ViewController.h"
+#import "UIViewController+SOContext.h"
 
-@interface ViewController ()
+#import "SOInjectMeta.h"
+
+@interface ViewController () <SOContextViewController>
+
+@property(assign, nonatomic) ViewController *Inject(typedViewController);
+@property(assign, nonatomic) UIViewController *Inject(nonTypedViewController);
 
 @end
 
@@ -16,7 +15,10 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
+  JSObjectionInjector *injector = self.so_injector;
+  NSLog(@"%@", self.so_injector);
+  assert(self == self.typedViewController);
+  assert(self == self.nonTypedViewController);
 }
 
 - (void)didReceiveMemoryWarning {
