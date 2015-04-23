@@ -5,8 +5,8 @@ The helper lib for Objection framework (http://objection-framework.org/).
 Define injectable property like
 ```objective-c
 @interface ViewController
-@property(strong, nonatomic) InjectableClassA *Inject(classA);
-@property(strong, nonatomic) InjectableClassB *Inject(classB);
+@InjectSingltonProperty InjectableClassA *classA;
+@InjectProperty InjectableClassB *classB;
 @end
 ```
 will auto generate the category like
@@ -15,6 +15,8 @@ will auto generate the category like
 objection_requires(@"classA",@"classB")
 @end
 ```
+
+NOTE, @InjectProperty will strong refer to the, and @InjectSingltonProperty will weak refer to the property. You may want to use @InjectSingltonProperty to avoid memory leak in some cases, like the child view controller may inject the context parent view controller (in next section), or a sington and another injectable object refers each other.
 
 ### View Controller scoped injection
 When we instantiate singletons in application object graph, they live in memory until the app is destroyed. But there are some singleton dependencies that are useful only when another object is alive. Like child view controllers may depends on parent view controller. Let the parent view controller conforms the
