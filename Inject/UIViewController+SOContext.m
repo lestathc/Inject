@@ -6,6 +6,31 @@
 #import "SOInjectorModule.h"
 #import "SOViewControllerModule.h"
 
+@interface SOContextViewControllerModule : JSObjectionModule
+@property(weak, nonatomic, readonly) UIViewController *viewController;
+- (instancetype)initWithViewController:(UIViewController *)viewController;
+@end
+
+@implementation SOContextViewControllerModule
+
+- (instancetype)initWithViewController:(UIViewController *)viewController {
+  self = [super init];
+  if (self) {
+    _viewController = viewController;
+  }
+  return self;
+}
+
+- (void)configure {
+  if ([_viewController class] != [UIViewController class]) {
+    [self bindClass:[_viewController class] toProtocol:@protocol(SOContextViewController)];
+  } else {
+    [self bindClass:[UIViewController class] toProtocol:@protocol(SOContextViewController)];
+  }
+}
+
+@end
+
 @interface UIViewController (SOContex)
 
 @property(weak, nonatomic) JSObjectionInjector *so_inheritedInjector;
@@ -48,7 +73,8 @@
 }
 
 - (void)setSo_injector:(JSObjectionInjector *)so_injector {
-  objc_setAssociatedObject(self, @selector(so_injector), so_injector, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+  objc_setAssociatedObject(self, @selector(so_injector), so_injector,
+                           OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (JSObjectionInjector *)so_injector {
@@ -58,16 +84,26 @@
 - (void)mayInejctSelfInheritsInjector:(JSObjectionInjector *)injector {
   if ([self conformsToProtocol:@protocol(SOContextViewController)]
       && self.so_injector == nil) {
+    NSMutableArray *modules = [self so_modulesInternal].mutableCopy;
+    NSArray *customModules = [self so_modules];
+    if (customModules.count) {
+      [modules addObjectsFromArray:customModules];
+    }
     JSObjectionInjector *newInjector =
         [[injector withModule:[[SOInjectorModule alloc] init]]
-            withModuleCollection:[self so_modules]];
+            withModuleCollection:modules];
     self.so_injector = newInjector;
     [newInjector injectDependencies:self];
   }
 }
 
 - (NSArray *)so_modules {
-  return @[ [[SOViewControllerModule alloc] initWithViewController:self], ];
+  return nil;
+}
+
+- (NSArray *)so_modulesInternal {
+  return @[ [[SOViewControllerModule alloc] initWithViewController:self],
+            [[SOContextViewControllerModule alloc] initWithViewController:self], ];
 }
 
 @end

@@ -43,7 +43,7 @@ objection_register_singleton(InjectableClassB)
 /**
  *  Self injection
  */
-@InjectSingltonProperty UIViewController *nonTypedViewController;
+@InjectSingltonProperty id<SOContextViewController> nonTypedViewController;
 /**
  *  View controller singlton
  */
