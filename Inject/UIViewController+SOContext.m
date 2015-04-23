@@ -8,14 +8,12 @@
 
 @interface UIViewController (SOContex)
 
-@property(strong, nonatomic) JSObjectionInjector *so_inheritedInjector;
-@property(assign, nonatomic) JSObjectionInjector *so_injector;
+@property(weak, nonatomic) JSObjectionInjector *so_inheritedInjector;
+@property(strong, nonatomic) JSObjectionInjector *so_injector;
 
 @end
 
 @implementation UIViewController (SOContext)
-
-objection_requires_sel(@selector(so_injector))
 
 + (void)load {
   NSError *error;
@@ -50,7 +48,7 @@ objection_requires_sel(@selector(so_injector))
 }
 
 - (void)setSo_injector:(JSObjectionInjector *)so_injector {
-  objc_setAssociatedObject(self, @selector(so_injector), so_injector, OBJC_ASSOCIATION_ASSIGN);
+  objc_setAssociatedObject(self, @selector(so_injector), so_injector, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (JSObjectionInjector *)so_injector {
@@ -63,6 +61,7 @@ objection_requires_sel(@selector(so_injector))
     JSObjectionInjector *newInjector =
         [[injector withModule:[[SOInjectorModule alloc] init]]
             withModuleCollection:[self so_modules]];
+    self.so_injector = newInjector;
     [newInjector injectDependencies:self];
   }
 }

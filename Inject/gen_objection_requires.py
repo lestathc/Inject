@@ -8,7 +8,7 @@ import sets
 INTERFACE_START_PATTERN = r'@interface\W+\b(\w+)\b'
 INTERFACE_START_PATTERN_REGEX = re.compile(INTERFACE_START_PATTERN)
 INTERFACE_END = '@end'
-PROPERTY_PATTERN = r'@property.*Inject\((\w+)\)\W*;'
+PROPERTY_PATTERN = r'@Inject\w*Property.*\b(\w+)\b\W*;'
 PROPERTY_PATTERN_REGEX = re.compile(PROPERTY_PATTERN)
 
 class Option:

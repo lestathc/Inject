@@ -11,9 +11,15 @@
 }
 
 - (void)configure {
-  [self bind:_viewController toClass:[UIViewController class]];
+  [self bindBlock:^id(JSObjectionInjector *context) {
+    return self.viewController;
+  }
+          toClass:[UIViewController class]];
   if ([_viewController class] != [UIViewController class]) {
-    [self bind:_viewController toClass:[_viewController class]];
+    [self bindBlock:^id(JSObjectionInjector *context) {
+      return self.viewController;
+    }
+            toClass:[_viewController class]];
   }
 }
 

@@ -4,7 +4,7 @@
 
 @interface SOViewControllerModule : JSObjectionModule
 
-@property(strong, nonatomic, readonly) UIViewController *viewController;
+@property(weak, nonatomic, readonly) UIViewController *viewController;
 
 - (instancetype)initWithViewController:(UIViewController *)viewController;
 

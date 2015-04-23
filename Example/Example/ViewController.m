@@ -6,49 +6,61 @@
 
 @implementation InjectableClassA
 objection_register_singleton(InjectableClassA)
+- (void)dealloc {
+  NSLog(@"%@ is deallocated", [NSString stringWithFormat:@"%@", self]);
+}
 @end
 
 @implementation InjectableClassB
 objection_register_singleton(InjectableClassB)
+- (void)dealloc {
+  NSLog(@"%@ is deallocated", [NSString stringWithFormat:@"%@", self]);
+}
 @end
 
 @interface InjectableClassC ()
-@property(strong, nonatomic) InjectableClassA *Inject(classA);
-@property(strong, nonatomic) InjectableClassB *Inject(classB);
+@InjectSingltonProperty InjectableClassA *classA;
+@InjectSingltonProperty InjectableClassB *classB;
 @end
 
 @implementation InjectableClassC
+- (void)dealloc {
+  NSLog(@"%@ is deallocated", [NSString stringWithFormat:@"%@", self]);
+}
 @end
 
 @implementation InjectableClassD
+- (void)dealloc {
+  NSLog(@"%@ is deallocated", [NSString stringWithFormat:@"%@", self]);
+}
 @end
 
 @interface ViewController () <SOContextViewController>
 /**
  *  Self injection
  */
-@property(assign, nonatomic) ViewController *Inject(typedViewController);
+@InjectSingltonProperty ViewController *typedViewController;
 /**
  *  Self injection
  */
-@property(assign, nonatomic) UIViewController *Inject(nonTypedViewController);
+@InjectSingltonProperty UIViewController *nonTypedViewController;
 /**
  *  View controller singlton
  */
-@property(strong, nonatomic) InjectableClassA *Inject(classA);
+@InjectSingltonProperty InjectableClassA *classA;
 /**
  *  View controller singlton
  */
-@property(strong, nonatomic) InjectableClassB *Inject(classB);
+@InjectSingltonProperty InjectableClassB *classB;
 /**
  *  Different instance with view controller singlton
  */
-@property(strong, nonatomic) InjectableClassC *Inject(classC);
-@property(strong, nonatomic) InjectableClassC *Inject(classCF);
+@InjectProperty InjectableClassC *classC;
+@InjectProperty InjectableClassC *classCF;
 /**
  *  Global singlton
  */
-@property(strong, nonatomic) InjectableClassD *Inject(classD);
+@InjectSingltonProperty InjectableClassD *classD;
 
 @end
 
@@ -57,17 +69,20 @@ objection_register_singleton(InjectableClassB)
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.title = [NSString stringWithFormat:@"%@", self];
-  self.label1.text = [NSString stringWithFormat:@"typedViewController: %@", self.typedViewController];
-  self.label2.text = [NSString stringWithFormat:@"nonTypedViewController: %@", self.nonTypedViewController];
-  self.label3.text = [NSString stringWithFormat:@"classA: %@", self.classA];
-  self.label4.text = [NSString stringWithFormat:@"classB: %@", self.classB];
-  self.label5.text = [NSString stringWithFormat:@"classC: %@, %@, %@\nclassCF: %@, %@, %@", self.classC, self.classC.classA, self.classC.classB, self.classCF, self.classCF.classA, self.classCF.classB];
-  self.label6.text = [NSString stringWithFormat:@"classD: %@", self.classD];
+  [[NSOperationQueue currentQueue] addOperationWithBlock:^{
+    // If there is life cycle problem, some text will be 'null'
+    self.title = [NSString stringWithFormat:@"%@", self];
+    self.label1.text = [NSString stringWithFormat:@"typedViewController: %@", self.typedViewController];
+    self.label2.text = [NSString stringWithFormat:@"nonTypedViewController: %@", self.nonTypedViewController];
+    self.label3.text = [NSString stringWithFormat:@"classA: %@", self.classA];
+    self.label4.text = [NSString stringWithFormat:@"classB: %@", self.classB];
+    self.label5.text = [NSString stringWithFormat:@"classC: %@, %@, %@\nclassCF: %@, %@, %@", self.classC, self.classC.classA, self.classC.classB, self.classCF, self.classCF.classA, self.classCF.classB];
+    self.label6.text = [NSString stringWithFormat:@"classD: %@", self.classD];
+  }];
 }
 
-- (IBAction)push {
-  
+- (void)dealloc {
+  NSLog(@"%@ is deallocated", [NSString stringWithFormat:@"%@", self]);
 }
 
 @end
