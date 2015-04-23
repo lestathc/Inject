@@ -11,13 +11,14 @@
 }
 
 - (void)configure {
+  __weak SOViewControllerModule *weakSelf = self;
   [self bindBlock:^id(JSObjectionInjector *context) {
-    return self.viewController;
+    return weakSelf.viewController;
   }
           toClass:[UIViewController class]];
   if ([_viewController class] != [UIViewController class]) {
     [self bindBlock:^id(JSObjectionInjector *context) {
-      return self.viewController;
+      return weakSelf.viewController;
     }
             toClass:[_viewController class]];
   }
